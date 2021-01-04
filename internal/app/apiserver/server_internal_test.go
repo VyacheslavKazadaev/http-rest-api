@@ -67,10 +67,31 @@ func TestServer_HandleSessionCreate(t *testing.T) {
 		{
 			name: "valid",
 			payload: map[string]string{
-				"email":    "users@example.org",
-				"password": "password",
+				"email":    u.Email,
+				"password": u.Password,
 			},
 			expectedCode: http.StatusOK,
+		},
+		{
+			name:         "invalid payload",
+			payload:      "invalid",
+			expectedCode: http.StatusBadRequest,
+		},
+		{
+			name: "invalid email",
+			payload: map[string]string{
+				"email":    "invalid",
+				"password": u.Password,
+			},
+			expectedCode: http.StatusUnauthorized,
+		},
+		{
+			name: "invalid password",
+			payload: map[string]string{
+				"email":    u.Email,
+				"password": "invalid",
+			},
+			expectedCode: http.StatusUnauthorized,
 		},
 	}
 
