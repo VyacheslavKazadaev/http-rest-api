@@ -15,3 +15,8 @@ Content-Type: application/json
 	"email": "user@example.org",
 	"password": "password"
 }
+
+###
+
+GET http://localhost:8080/private/whoami HTTP/1.1
+Origin: google.com
